@@ -1,0 +1,15 @@
+name: Rackspace Calculator
+machine_name: calculator
+type: pdb
+description: 'Rackspace Calculator Block'
+package: Vue
+module_status: active
+presentation: vue
+core: '8.x'
+add_js:
+  footer:
+    'dist/static/js/manifest.js': {}
+    'dist/static/js/vendor.js': {}
+    'dist/static/js/app.js': {}
+libraries:
+  - rackspace/calculator
