@@ -29,14 +29,9 @@ export default {
   components: {
     CurrencySwitcher
   },
-  props: {
-    currency: {
-      type: String,
-      default: "USD"
-    }
-  },
   data() {
     return {
+      currency: "USD",
       prices: prices,
       rax_qty: 0,
       raxplus: false,
@@ -50,7 +45,7 @@ export default {
       const type = this.raxplus
         ? "app_rackspace_email_plus"
         : "app_rackspace_email";
-      return this.rax_qty * this.prices[type][this.currency];
+      return Number(this.rax_qty) * this.prices[type][this.currency];
     },
     total: function() {
       return this.rax_total;

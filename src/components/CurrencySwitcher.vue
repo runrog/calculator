@@ -10,6 +10,7 @@
 
 <script>
 import numberFormats from "@/numberFormats.json";
+import { loadLanguage } from "@/i18n";
 export default {
   name: "CurrencySwitcher",
   props: {
@@ -24,8 +25,11 @@ export default {
     };
   },
   watch: {
-    selected(val) {
-      this.$root.$i18n.locale = val.locale;
+    value(val) {
+      const entry = Object.entries(numberFormats).filter(
+        e => e[1].currency.currency == val
+      );
+      loadLanguage(entry[0][0]);
     }
   }
 };

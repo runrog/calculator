@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import EmailCalculator from "./components/EmailCalculator.vue";
+import EmailCalculator from "@/components/email/EmailCalculator.vue";
 
 export default {
   name: "App",
