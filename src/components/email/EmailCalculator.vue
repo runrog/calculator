@@ -3,18 +3,23 @@
     <fieldset>
       <legend>Email Calculator</legend>
       <label for="rax_qty">{{ $t("rax_label") }}</label>
-      <input id="rax_qty" v-model="rax_qty" />
+      <input id="rax_qty" v-model.number="rax_qty" />
       <br />
-      <label for="raxplus">
+      <label for="rseplus">
         Rackspace Email Plus
-        <input id="raxplus" type="checkbox" v-model="raxplus" />
+        <input id="rseplus" type="checkbox" v-model="rseplus" />
       </label>
       <br />
       <label for="hex_qty">Hosted Exchange mailboxes</label>
-      <input id="hex_qty" v-model="hex_qty" />
+      <input id="hex_qty" v-model.number="hex_qty" />
       <br />
       <label for="office_qty">Microsoft Office seats</label>
-      <input id="office_qty" v-model="office_qty" />
+      <input id="office_qty" v-model.number="office_qty" />
+      <br />
+      <label for="arch">
+        Email Archiving
+        <input id="arch" type="checkbox" v-model="arch" />
+      </label>
       <br />Total:
       <i18n-n :value="total" format="currency"></i18n-n>
       <br />
@@ -40,7 +45,7 @@ export default {
       rseplus: false,
       hex_qty: 0,
       office_qty: 0,
-      email_archiving: false
+      arch: false
     };
   },
   computed: {
@@ -48,26 +53,28 @@ export default {
       const type = this.rseplus
         ? "app_rackspace_email_plus"
         : "app_rackspace_email";
-      return ~~this.rax_qty * this.prices[type][this.currency];
+      return this.rax_qty * this.prices[type][this.currency];
     },
     hex_total() {
       const type = "app_msft_exchange";
-      return ~~this.hex_qty * this.prices[type][this.currency];
+      return this.hex_qty * this.prices[type][this.currency];
     },
     office_total() {
       const type = "app_msft_business_onedrive";
-      return ~~this.office_qty * this.prices[type][this.currency];
+      return this.office_qty * this.prices[type][this.currency];
     },
     mailbox_qty() {
-      return ~~this.rax_qty + ~~this.hex_qty;
+      return this.rax_qty + this.hex_qty;
     },
     arch_total() {
       const type = "app_email_archiving";
-      if (!this.email_archiving) return 0;
+      if (!this.arch) return 0;
       return this.mailbox_qty * this.prices[type][this.currency];
     },
     total() {
-      return this.rax_total;
+      return (
+        this.rax_total + this.hex_total + this.office_total + this.arch_total
+      );
     }
   }
 };
