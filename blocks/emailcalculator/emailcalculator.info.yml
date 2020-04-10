@@ -1,0 +1,17 @@
+name: EmailCalculator
+machine_name: emailcalculator
+type: pdb
+description: 'EmailCalculator pdb_vue block'
+package: Vue
+core: '8.x'
+module_status: active
+presentation: vue
+add_css:
+  header:
+    theme:
+      '../../dist/css/emailcalculator.css': {}
+add_js:
+  footer:
+    '../../dist/js/emailcalculator.js': { minified: true }
+libraries:
+  - rackspace/pdb_vue.common
