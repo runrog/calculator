@@ -1,10 +1,17 @@
 <template>
   <div class="currency-switcher">
-    <select :value="value" @input="$emit('input', $event.target.value)">
-      <option v-for="(l, i) in locales" :key="i" :value="l.currency.currency">
+    <div class="currency-switcher-selected" @click.prevent="showOptions = !showOptions">
+      {{ value }}
+    </div>
+    <div class="currency-switcher-options" v-if="showOptions">
+      <div
+        class="currency-switcher-option"
+        v-for="(l, i) in locales"
+        @click.prevent="updateCurrency(l.currency.currency)"
+        :key="i">
         {{ l.currency.currency }}
-      </option>
-    </select>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,7 +28,8 @@ export default {
   },
   data() {
     return {
-      locales: numberFormats
+      locales: numberFormats,
+      showOptions: false,
     };
   },
   watch: {
@@ -31,6 +39,48 @@ export default {
       );
       loadLanguage(entry[0][0]);
     }
-  }
+  },
+  methods: {
+    updateCurrency(value) {
+      this.$emit('input', value);
+      this.showOptions = false;
+    },
+  },
 };
 </script>
+<style scoped>
+  .currency-switcher {
+    bottom: 10px;
+    left: 11px;
+    position: absolute;
+    user-select: none;
+    width: 50px;
+    z-index: 3;
+  }
+  .currency-switcher-selected {
+    color: #b2b2b0;
+    font-size: 14px;
+    padding: 3px;
+  }
+  .currency-switcher:hover {
+    cursor: pointer;
+  }
+  .currency-switcher-options {
+    background-color: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0px 0px 12px -1px rgba(0,0,0,0.34);
+    box-sizing: border-box;
+    color: #333333;
+    overflow: hidden;
+    position: absolute;
+    width: 110px;
+  }
+  .currency-switcher-option {
+    padding: 3px 0;
+  }
+  .currency-switcher-option:hover {
+    background-color: #ececec;
+    cursor: pointer;
+    transition-duration: .2s;
+  }
+</style>

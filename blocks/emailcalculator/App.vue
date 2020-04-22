@@ -23,9 +23,8 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.emailcalculator {
-  background-color: aqua;
-}
+<style media="screen">
+  body {
+    font-family: Arial;
+  }
 </style>
