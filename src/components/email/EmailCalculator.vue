@@ -8,9 +8,11 @@
         class="ex-totalBox-total"
       ></i18n-n>
       <span class="ec-totalBox-txt">Per Month</span>
-      <CurrencySwitcher v-model="currency" />
     </div>
     <div class="email-calculator-fields">
+      <div class="email-currency-field">
+        <CurrencySwitcher v-model="currency" />
+      </div>
       <div
         class="email-calculator-field"
         :class="{ 'email-calculator-activeField': rax_qty > 0 }"
@@ -20,8 +22,8 @@
             <label for="rax_qty">{{ $t("rax_label") }}</label>
           </div>
           <div class="email-calculator-slimField">
-            <label class="email-checkbox-container" for="rseplus"
-              >Email Plus
+            <label class="email-checkbox-container" for="rseplus">
+              <span class="email-checkbox-labelText">Email Plus</span>
               <input
                 class="email-checkbox"
                 id="rseplus"
@@ -123,24 +125,34 @@
       </div>
       <div class="email-calculator-slimField">
         <div class="email-fieldCol-6">
-          Email Archiving
-        </div>
-        <div class="email-fieldCol-6">
-          <div class="email-adjustBox">
-            <label class="email-calculator-checkLabel" for="arch">
-              <input
-                id="arch"
-                class="email-calculator-checkInput"
-                type="checkbox"
-                v-model="arch"
-              />
-              <span class="email-calculator-slider"></span>
-            </label>
-          </div>
+          <label class="email-checkbox-container" for="arch">
+            <span class="email-checkbox-labelText">Email Archiving</span>
+            <input
+              class="email-checkbox"
+              id="arch"
+              type="checkbox"
+              v-model="arch"
+            />
+            <span class="email-checkbox-mark"></span>
+          </label>
         </div>
       </div>
       <div class="email-calculator-slimField">
         <button class="email-calculator-nextBtn" name="next">Next Step</button>
+      </div>
+      <div class="email-calculator-disclaimer">
+        <p>
+          Your first 14 days are free! Charges will be assessed after that based
+          on the number of provisioned products on your account at that time.
+          Rackspace Cloud Office requires a monthly minimum spend of $10.00.
+          Prices exclude VAT, GST, or applicable taxes.
+        </p>
+        <p>No long-term contracts. Cancel any time with one click.</p>
+        <p>
+          * Selecting Office automatically sets up your account to add Microsoft
+          Office to any mailbox. You will be billed once Office is added in the
+          Control Panel.
+        </p>
       </div>
     </div>
   </div>
@@ -214,9 +226,7 @@ export default {
 }
 .ec-totalBox {
   align-items: center;
-  background-color: #333333;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  background-color: #0056cb;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -226,7 +236,7 @@ export default {
   text-align: center;
 }
 .email-calculator-nextBtn {
-  background-color: #333333;
+  background-color: #ed1918;
   border: 0;
   color: #ffffff;
   font-size: 16px;
@@ -235,17 +245,32 @@ export default {
   width: 100%;
 }
 .email-calculator-nextBtn:hover {
-  background-color: #4e4e4e;
+  background-color: #d61413;
   cursor: pointer;
 }
 .ec-totalBox-txt {
-  color: #b2b2b0;
+  color: rgba(255, 255, 255, 0.7);
   display: block;
 }
 .ex-totalBox-total {
   color: #ffffff;
   font-size: 48px;
   margin: 10px 0;
+}
+.email-currency-field {
+  position: relative;
+  margin-bottom: 15px;
+  z-index: 3;
+}
+.email-currency-field:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+.email-currency-field:before {
+  clear: both;
+  content: "";
+  display: table;
 }
 .email-calculator-fields {
   background-color: #f2f2f2;
@@ -266,12 +291,16 @@ export default {
 .email-calculator-field {
   background-color: #ffffff;
   border: 2px solid #c7c7c7;
-  border-radius: 3px;
+  border-radius: 10px;
   margin-bottom: 20px;
   padding: 20px;
+  transition-duration: 0.2s;
+}
+.email-calculator-field:hover {
+  background-color: #f2f8fd;
 }
 .email-calculator-activeField {
-  border-color: #333333;
+  border-color: #0056cb;
 }
 .email-calculator-field:after {
   clear: both;
@@ -307,7 +336,7 @@ export default {
   width: 50%;
 }
 .email-subBtn {
-  background-color: transparent;
+  background-color: #ffffff;
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
   border: 2px solid #cccccc;
@@ -318,7 +347,7 @@ export default {
   right: -2px;
 }
 .email-subBtn:focus {
-  border-color: #333333;
+  border-color: #0056cb;
   outline: 0;
 }
 .email-subBtn:hover {
@@ -343,7 +372,7 @@ export default {
   -moz-appearance: textfield;
 }
 .email-addBtn {
-  background-color: transparent;
+  background-color: #ffffff;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
   border: 2px solid #cccccc;
@@ -354,7 +383,7 @@ export default {
   left: -2px;
 }
 .email-addBtn:focus {
-  border-color: #333333;
+  border-color: #0056cb;
   outline: 0;
 }
 .email-addBtn:hover {
@@ -397,11 +426,11 @@ export default {
   transition: 0.2s;
 }
 .email-calculator-checkInput:checked + .email-calculator-slider {
-  background-color: #333333;
+  background-color: #0056cb;
 }
 
 .email-calculator-checkInput:focus + .email-calculator-slider {
-  box-shadow: 0 0 1px #333333;
+  box-shadow: 0 0 1px #0056cb;
 }
 .email-calculator-checkInput:checked + .email-calculator-slider:before {
   transform: translateX(16px);
@@ -427,9 +456,13 @@ export default {
   height: 20px;
   width: 20px;
   background-color: #e8e8e8;
+  border: 2px solid transparent;
+}
+.email-checkbox-mark:hover {
+  border: 2px solid #0056cb;
 }
 .email-checkbox:checked ~ .email-checkbox-mark {
-  background-color: #333333;
+  background-color: #0056cb;
 }
 .email-checkbox-mark:after {
   content: "";
@@ -447,5 +480,14 @@ export default {
   border: solid white;
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
+}
+.email-checkbox-labelText {
+  position: relative;
+  top: 3px;
+}
+.email-calculator-disclaimer {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 9px;
+  font-style: italic;
 }
 </style>
