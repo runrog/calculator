@@ -8,7 +8,7 @@ describe("EmailCalculator", () => {
         prices: prices,
         rax_qty: 2,
         currency: "USD",
-        rseplus: false
+        rseplus: false,
       };
       expect(EmailCalculator.computed.rax_total.call(localThis)).toBe(5.98);
     });
@@ -18,7 +18,7 @@ describe("EmailCalculator", () => {
         prices: prices,
         rax_qty: 2,
         currency: "USD",
-        rseplus: true
+        rseplus: true,
       };
       expect(EmailCalculator.computed.rax_total.call(localThis)).toBe(7.98);
     });
@@ -29,7 +29,7 @@ describe("EmailCalculator", () => {
       const localThis = {
         prices: prices,
         hex_qty: 2,
-        currency: "USD"
+        currency: "USD",
       };
       expect(EmailCalculator.computed.hex_total.call(localThis)).toBe(21.98);
     });
@@ -40,7 +40,7 @@ describe("EmailCalculator", () => {
       const localThis = {
         prices: prices,
         office_qty: 2,
-        currency: "USD"
+        currency: "USD",
       };
       expect(EmailCalculator.computed.office_total.call(localThis)).toBe(16);
     });
@@ -53,7 +53,7 @@ describe("EmailCalculator", () => {
         rax_qty: 1,
         hex_qty: 1,
         currency: "USD",
-        arch: false
+        arch: false,
       };
       expect(EmailCalculator.computed.arch_total.call(localThis)).toBe(0);
     });
@@ -64,7 +64,7 @@ describe("EmailCalculator", () => {
         rax_qty: 1,
         hex_qty: 1,
         currency: "USD",
-        arch: false
+        arch: false,
       };
       expect(EmailCalculator.computed.mailbox_qty.call(localThis)).toBe(2);
     });
@@ -76,7 +76,7 @@ describe("EmailCalculator", () => {
         hex_qty: 0,
         currency: "USD",
         arch: true,
-        mailbox_qty: 0
+        mailbox_qty: 0,
       };
       expect(EmailCalculator.computed.arch_total.call(localThis)).toBe(0);
     });
@@ -88,7 +88,7 @@ describe("EmailCalculator", () => {
         hex_qty: 1,
         currency: "USD",
         arch: true,
-        mailbox_qty: 2
+        mailbox_qty: 2,
       };
       expect(EmailCalculator.computed.arch_total.call(localThis)).toBe(6);
     });
@@ -99,7 +99,7 @@ describe("EmailCalculator", () => {
       rax_total: 1,
       hex_total: 2,
       office_total: 3,
-      arch_total: 4
+      arch_total: 4,
     };
     expect(EmailCalculator.computed.total.call(localThis)).toBe(10);
   });

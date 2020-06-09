@@ -1,6 +1,6 @@
 import {
   shallowMount as testShallow,
-  mount as testMount
+  mount as testMount,
 } from "@vue/test-utils";
 import { i18n } from "@/i18n";
 

@@ -11,8 +11,8 @@ import EmailCalculator from "@/components/email/EmailCalculator.vue";
 export default {
   name: "App",
   components: {
-    EmailCalculator
-  }
+    EmailCalculator,
+  },
 };
 </script>
 

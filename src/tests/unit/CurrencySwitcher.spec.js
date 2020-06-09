@@ -4,16 +4,16 @@ import CurrencySwitcher from "@/components/CurrencySwitcher.vue";
 
 const mockComponent = Vue.component("mockComponent", {
   components: {
-    CurrencySwitcher
+    CurrencySwitcher,
   },
   data() {
     return {
       number: 1.23,
-      currency: "USD"
+      currency: "USD",
     };
   },
   template:
-    '<div>{{ $t("rax_label") }}<i18n-n :value="number" format="currency"></i18n-n><CurrencySwitcher v-model="currency" /></div>'
+    '<div>{{ $t("rax_label") }}<i18n-n :value="number" format="currency"></i18n-n><CurrencySwitcher v-model="currency" /></div>',
 });
 
 describe("CurrencySwitcher", () => {
@@ -28,7 +28,7 @@ describe("CurrencySwitcher", () => {
     const wrapper = mount(mockComponent);
     wrapper.setData({
       currency: "AUD",
-      number: 2.34
+      number: 2.34,
     });
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
@@ -40,7 +40,7 @@ describe("CurrencySwitcher", () => {
     const wrapper = mount(mockComponent);
     wrapper.setData({
       currency: "GBP",
-      number: 3.45
+      number: 3.45,
     });
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
@@ -52,7 +52,7 @@ describe("CurrencySwitcher", () => {
     const wrapper = mount(mockComponent);
     wrapper.setData({
       currency: "EUR",
-      number: 4.56
+      number: 4.56,
     });
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();

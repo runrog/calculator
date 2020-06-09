@@ -9,13 +9,13 @@ module.exports = {
       locale: "en",
       fallbackLocale: "en",
       localeDir: "locales",
-      enableInSFC: false
-    }
+      enableInSFC: false,
+    },
   },
   // Disable filename hashing in Drupal.
   filenameHashing: false,
   // Generate individual files for each instance.
   pages: singleInstances(),
   // Set the public path so images will work.
-  publicPath: process.env.NODE_ENV === "production" ? drupalPath : "/"
+  publicPath: process.env.NODE_ENV === "production" ? drupalPath : "/",
 };

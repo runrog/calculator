@@ -10,21 +10,21 @@ import EmailCalculator from "@/components/email/EmailCalculator.vue";
 export default {
   name: "emailcalculator",
   components: {
-    EmailCalculator
+    EmailCalculator,
   },
   data() {
     return {
-      instanceId: ""
+      instanceId: "",
     };
   },
   beforeMount() {
     // Get the ID tag containing the drupal instance id.
     this.instanceId = this.$parent.$el.id;
-  }
+  },
 };
 </script>
 <style media="screen">
-  body {
-    font-family: Arial;
-  }
+body {
+  font-family: Arial;
+}
 </style>
