@@ -17,9 +17,9 @@ export const i18n = new VueI18n({
   locale: defaultLocale,
   fallbackLocale: defaultLocale,
   messages: {
-    [defaultLocale]: includedLanguage
+    [defaultLocale]: includedLanguage,
   },
-  numberFormats
+  numberFormats,
 });
 
 // all the other languages, these will be loaded as chunks via webpack
@@ -29,13 +29,13 @@ const messages = {
   en: () => import(/* webpackChunkName: "en" */ "./locales/en.json"),
   "en-AU": () => import(/* webpackChunkName: "nl" */ "./locales/en-AU.json"),
   "en-GB": () => import(/* webpackChunkName: "nl" */ "./locales/en-GB.json"),
-  "en-CH": () => import(/* webpackChunkName: "nl" */ "./locales/en-CH.json")
+  "en-CH": () => import(/* webpackChunkName: "nl" */ "./locales/en-CH.json"),
 };
 
 // load our language chunk and set our language after request
 // will refresh the views with the new language immediately
 export function loadLanguage(lang) {
-  return messages[lang]().then(i18nMessages => {
+  return messages[lang]().then((i18nMessages) => {
     i18n.setLocaleMessage(lang, i18nMessages);
     i18n.locale = lang;
     document.documentElement.setAttribute("lang", lang);
