@@ -22,6 +22,22 @@ describe("EmailCalculator", () => {
       };
       expect(EmailCalculator.computed.rax_total.call(localThis)).toBe(7.98);
     });
+
+    it("buttonUrl builds the correct URL", () => {
+      let localThis = {
+        prices: prices,
+        rax_qty: 2,
+        currency: "USD",
+        rseplus: false,
+      };
+      let expected = "/apps/combined/rax:2";
+      expect(EmailCalculator.computed.buttonUrl.call(localThis)).toBe(expected);
+
+      localThis.rax_qty = 3;
+      localThis.rseplus = true;
+      expected = "/apps/combined/rseplus:3";
+      expect(EmailCalculator.computed.buttonUrl.call(localThis)).toBe(expected);
+    });
   });
 
   describe("Microsoft Exchange", () => {
@@ -33,6 +49,16 @@ describe("EmailCalculator", () => {
       };
       expect(EmailCalculator.computed.hex_total.call(localThis)).toBe(21.98);
     });
+
+    it("buttonUrl builds the correct URL", () => {
+      let localThis = {
+        prices: prices,
+        hex_qty: 2,
+        currency: "USD",
+      };
+      let expected = "/apps/combined/hex:2";
+      expect(EmailCalculator.computed.buttonUrl.call(localThis)).toBe(expected);
+    });
   });
 
   describe("Microsoft Office", () => {
@@ -43,6 +69,16 @@ describe("EmailCalculator", () => {
         currency: "USD",
       };
       expect(EmailCalculator.computed.office_total.call(localThis)).toBe(16);
+    });
+
+    it("buttonUrl builds the correct URL", () => {
+      let localThis = {
+        prices: prices,
+        office_qty: 2,
+        currency: "USD",
+      };
+      let expected = "/apps/combined/office:2";
+      expect(EmailCalculator.computed.buttonUrl.call(localThis)).toBe(expected);
     });
   });
 
@@ -92,6 +128,16 @@ describe("EmailCalculator", () => {
       };
       expect(EmailCalculator.computed.arch_total.call(localThis)).toBe(6);
     });
+
+    it("buttonUrl builds the correct URL", () => {
+      let localThis = {
+        prices: prices,
+        arch: true,
+        currency: "USD",
+      };
+      let expected = "/apps/combined/arch:true";
+      expect(EmailCalculator.computed.buttonUrl.call(localThis)).toBe(expected);
+    });
   });
 
   it("total calculates correct amount for all options", () => {
@@ -102,5 +148,27 @@ describe("EmailCalculator", () => {
       arch_total: 4,
     };
     expect(EmailCalculator.computed.total.call(localThis)).toBe(10);
+  });
+
+  it("buttonUrl builds the default URL with no products selected", () => {
+    let localThis = {
+      prices: prices,
+      currency: "USD",
+    };
+    let expected = "/apps";
+    expect(EmailCalculator.computed.buttonUrl.call(localThis)).toBe(expected);
+  });
+
+  it("buttonUrl builds the correct URL with multiple products", () => {
+    let localThis = {
+      prices: prices,
+      currency: "USD",
+      rax_qty: 1,
+      hex_qty: 2,
+      office_qty: 3,
+      arch: true,
+    };
+    let expected = "/apps/combined/rax:1/hex:2/office:3/arch:true";
+    expect(EmailCalculator.computed.buttonUrl.call(localThis)).toBe(expected);
   });
 });

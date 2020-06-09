@@ -1,13 +1,13 @@
 <template>
   <div class="email-calculator">
     <div class="ec-totalBox">
-      <span class="ec-totalBox-txt">Estimated Total</span>
+      <span class="ec-totalBox-txt">{{ $t("Estimated Total") }}</span>
       <i18n-n
         :value="total"
         format="currency"
         class="ex-totalBox-total"
       ></i18n-n>
-      <span class="ec-totalBox-txt">Per Month</span>
+      <span class="ec-totalBox-txt">{{ $t("Per Month") }}</span>
     </div>
     <div class="email-calculator-fields">
       <div class="email-currency-field">
@@ -19,11 +19,13 @@
       >
         <div class="email-fieldCol-6">
           <div class="email-calculator-slimField">
-            <label for="rax_qty">{{ $t("rax_label") }}</label>
+            <label for="rax_qty">{{ $t("Rackspace Email") }}</label>
           </div>
           <div class="email-calculator-slimField">
             <label class="email-checkbox-container" for="rseplus">
-              <span class="email-checkbox-labelText">Email Plus</span>
+              <span class="email-checkbox-labelText">{{
+                $t("Email Plus")
+              }}</span>
               <input
                 class="email-checkbox"
                 id="rseplus"
@@ -64,7 +66,7 @@
         :class="{ 'email-calculator-activeField': hex_qty > 0 }"
       >
         <div class="email-fieldCol-6">
-          <label for="hex_qty">Hosted Exchange mailboxes</label>
+          <label for="hex_qty">{{ $t("Hosted Exchange mailboxes") }}</label>
         </div>
         <div class="email-fieldCol-6">
           <div class="email-adjustBox">
@@ -96,7 +98,7 @@
         :class="{ 'email-calculator-activeField': office_qty > 0 }"
       >
         <div class="email-fieldCol-6">
-          <label for="office_qty">Microsoft Office seats</label>
+          <label for="office_qty">{{ $t("Microsoft Office seats") }}</label>
         </div>
         <div class="email-fieldCol-6">
           <div class="email-adjustBox">
@@ -126,7 +128,9 @@
       <div class="email-calculator-slimField">
         <div class="email-fieldCol-6">
           <label class="email-checkbox-container" for="arch">
-            <span class="email-checkbox-labelText">Email Archiving</span>
+            <span class="email-checkbox-labelText">{{
+              $t("Email Archiving")
+            }}</span>
             <input
               class="email-checkbox"
               id="arch"
@@ -138,21 +142,17 @@
         </div>
       </div>
       <div class="email-calculator-slimField">
-        <button class="email-calculator-nextBtn" name="next">Next Step</button>
+        <a
+          class="email-calculator-nextBtn"
+          name="next"
+          :href="'https://cart.rackspace.com' + buttonUrl"
+          >{{ $t("Next Step") }}</a
+        >
       </div>
       <div class="email-calculator-disclaimer">
-        <p>
-          Your first 14 days are free! Charges will be assessed after that based
-          on the number of provisioned products on your account at that time.
-          Rackspace Cloud Office requires a monthly minimum spend of $10.00.
-          Prices exclude VAT, GST, or applicable taxes.
-        </p>
-        <p>No long-term contracts. Cancel any time with one click.</p>
-        <p>
-          * Selecting Office automatically sets up your account to add Microsoft
-          Office to any mailbox. You will be billed once Office is added in the
-          Control Panel.
-        </p>
+        <p>{{ $t("disclaimer_1") }}</p>
+        <p>{{ $t("disclaimer_2") }}</p>
+        <p>{{ $t("disclaimer_3") }}</p>
       </div>
     </div>
   </div>
@@ -206,6 +206,29 @@ export default {
         this.rax_total + this.hex_total + this.office_total + this.arch_total
       );
     },
+    buttonUrl() {
+      let url = "";
+      // Raclspace Email
+      if (this.rax_qty) {
+        url += "/";
+        url += this.rseplus ? "rseplus" : "rax";
+        url += ":" + this.rax_qty;
+      }
+      // Hex
+      if (this.hex_qty) {
+        url += "/hex:" + this.hex_qty;
+      }
+      // Office
+      if (this.office_qty) {
+        url += "/office:" + this.office_qty;
+      }
+      // Archiving
+      if (this.arch) {
+        url += "/arch:true";
+      }
+      if (!url) return "/apps";
+      return "/apps/combined" + url;
+    },
   },
   methods: {
     setVal(item, op) {
@@ -240,9 +263,12 @@ export default {
   border: 0;
   color: #ffffff;
   font-size: 16px;
-  padding: 15px;
+  padding: 15px 0;
   transition-duration: 0.2s;
   width: 100%;
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
 }
 .email-calculator-nextBtn:hover {
   background-color: #d61413;
