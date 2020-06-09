@@ -54,15 +54,13 @@ export default {
 </script>
 <style scoped>
 .currency-switcher {
-  bottom: 10px;
-  left: 11px;
-  position: absolute;
+  float: right;
   user-select: none;
   width: 50px;
   z-index: 3;
 }
 .currency-switcher-selected {
-  color: #b2b2b0;
+  color: rgba(0, 0, 0, 0.7);
   font-size: 14px;
   padding: 3px;
 }
@@ -77,6 +75,9 @@ export default {
   color: #333333;
   overflow: hidden;
   position: absolute;
+  right: 0px;
+  text-align: center;
+  top: 30px;
   width: 110px;
 }
 .currency-switcher-option {
