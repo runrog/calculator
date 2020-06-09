@@ -13,7 +13,7 @@ const mockComponent = Vue.component("mockComponent", {
     };
   },
   template:
-    '<div>{{ $t("rax_label") }}<i18n-n :value="number" format="currency"></i18n-n><CurrencySwitcher v-model="currency" /></div>',
+    '<div>{{ $t("Rackspace Email") }}<i18n-n :value="number" format="currency"></i18n-n><CurrencySwitcher v-model="currency" /></div>',
 });
 
 describe("CurrencySwitcher", () => {
